@@ -3,11 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Daunku</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.js' integrity='sha512-pmaEGtUAy7E5gRmwjLqQAD/QWw0dL4Z59b6b+2HQkqQwQ+HcPLLb9/KbUNo5zr10WuXmbivK9nYVZOyDkMgZMg==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js' integrity='sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==' crossorigin='anonymous'></script>
 </head>
 <body>
-    <div class="wrap">
-        <h1>hi</h1>
+    <div class="cartPopup" id="pop">
+        <div class="cartPopupContainer"></div>
+        <input class="inpCart" type="text" placeholder="Name" id="username">
+        <input class="inpCart" type="text" placeholder="Phone" id="phone">
+        <button class="butCart" id="confirmBtn">Confirm</button>
     </div>
+    <div class="wrap">
+        <header class="heder">
+            <img class="Logo" src="img/Logo.png" alt="">
+            <div class="menu">
+                <h4 class="home" style="margin: 5px;">Home</h4>
+                <a href="/admin"><h4 class="shop" style="margin: 5px;">Admin</h4></a>
+                <a href="/allgoods"><h4 class="about" style="margin: 5px;">All goods</h4></a>
+                <h4 style="cursor: pointer;" class="contact" style="margin: 5px;">Contact</h4>
+            </div>
+            <img id="cart" class="card" src="img/Vector.png" alt="">
+        </header>
+
+
+
+
+
+        <h1 class="title">Bring Serenity to Your Place <br>With Interior Plants</h1>
+        <h3 class="subtitle">find your dream plant for you home decoration <br>with us, and we will make it happen.</h3>
+        <div class="searchplace">
+        <input class="search" type="text" placeholder="Search plant">
+        <button class="btnSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </div>
+    <div class="section">
+        <div class="advantages">
+            <div class="advant">
+                <img src="img/box1.png" alt="">
+                <div class="deliveryText">
+                <h1 class="Shapping">Free Shapping</h1>
+                <h5 class="delivery">No charge for each delivery</h5>
+                </div>
+            </div>
+
+
+            <div class="advant">
+                <img src="img/wallet.png" alt="">
+                <div class="deliveryText">
+                <h1 class="Shapping">Quick Payment</h1>
+                <h5 class="delivery">100% secure payment</h5>
+                </div>
+            </div>
+
+
+            <div class="advant">
+                <img src="img/support.png" alt="">
+                <div class="deliveryText">
+                <h1 class="Shapping">24/7 Support</h1>
+                <h5 class="delivery">Quick support</h5>
+                </div>
+            </div>
+        </div>
+            <div class="productPage">
+                <div class="titlePP">
+                    <h2>Best Seller Product</h2>
+                    <p>See all collections<i class="fa-solid fa-arrow-right"></i></p>
+                </div>
+                <div class="goodsContainer"></div>
+            </div>
+    </div>
+    <div class="section1">
+        <div class="room1">living room</div>
+        <div class="room2">workplace</div>
+        <div class="room3">guest room</div>
+    </div>
+    <div class="section2">
+        <div class="textcareplants">
+        <h1 class="careForplantstext">How to care <br>for plants</h1>
+        <h3>Take care of plants with all your heart</h5>
+        </div>
+        
+        
+        <div class="advices">
+            <div class="advicePlant">
+                <img class="logocareplant" src="img/iconsun.png" alt="">
+                <div class="advicePlantText">
+                <h1>Adjust Lighting</h1>
+                <h3>When caring for indoor plants, make sure the <br>room temperature is neither too cold nor too hot</h3>
+                </div>
+            </div>
+            <div class="advicePlant">
+                <img class="logocareplant" src="img/plantpot.png" alt="">
+                <div class="advicePlantText">
+                <h1>Don't water too often</h1>
+                <h3>Watering ornamental plants indoors does <br>not have to be done every day.</h3>
+                </div>
+            </div>
+            <div class="advicePlant">
+                <img class="logocareplant" src="img/temperature.png" alt="">
+                <div class="advicePlantText">
+                <h1>Fertilize regularly</h1>
+                <h3>The nutrients most indoor houseplants need are <br>nitrogen for balance and potassium for stem <br>strength</h3>
+                </div>
+            </div>
+            <img class="backgroundplants" src="img/pots.png" alt="">
+        </div>
+    </div>
+    <div class="basement">
+        <div class="news">
+            <h1 class="Newslatter">Newslatter</h1>
+            <input class="emailNews" type="email" id="email" placeholder="enter your email">
+            <button class="subscribeBtn" id="subscribe">Subscribe</button>
+        </div>
+        <div class="ourAdress" id="basementAdress"></div>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>

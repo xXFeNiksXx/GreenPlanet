@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.heder{
+    width: 100%;
+    height: 10vh;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333;
+}
+.menu{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+.menu a{
+    text-decoration: none;
+    color: white;
+}
+.about {
+    background: linear-gradient(90deg, #2AF598 0%, #009EFD 100%);
+    background-clip: text;
+    color: transparent;
+}
+.goodsContainer{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.goodsCard{
+    width: 250px;
+    height: 250px;
+    background-color: #98b6b3;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    box-shadow: 0 2px 5px #ccc;
+    margin: 20px 10px;
+}
+.goodsDesc{
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border-radius: 50px;
+    height: 150px;
+    padding: 30px;
+    font-family: 'Work Sans';
+    justify-content: space-between;
+}
+.goodsDesc p{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.goodsDesc button{
+    width: 50px;
+    height: 50px;
+    background: rgb(42, 245, 180);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 50%;
+    font-size: 32px;
+    cursor: pointer;
+    position: relative;
+    left: 70%;
+}
+.goodsImg{
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    margin-bottom: 10px;
+}
+.cardgoods{
+    width: 250px;
+    height: 400px;
+    background-color: #98b6b3;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    box-shadow: 0 2px 5px #ccc;
+    margin: 15px 0px;
+}
+.cartPopup{
+    width: 300px;
+    min-height: 300px;
+    box-shadow: 0 0 10px #999;
+    position: fixed;
+    top: 100px;
+    right: 100px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    z-index: 3;
+}
+.inpCart{
+    background-color: #95a5a6 ;
+    border: none;
+    margin: 5px;
+    height: 30px;
+    border-radius: 10px;
+}
+.inpCart::placeholder{
+    color: black;
+}
+.butCart{
+    background-color: #3498db;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}

@@ -1,0 +1,368 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Work Sans';
+}
+.wrap{
+    width: 100%;
+    min-height: 100vh;
+}
+.goodsContainer{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+
+
+.cardgoods{
+    width: 250px;
+    height: 400px;
+    background-color: #98b6b3;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    box-shadow: 0 2px 5px #ccc;
+    margin: 15px 0px;
+}
+.goodsDesc{
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border-radius: 50px;
+    height: 150px;
+    padding: 30px;
+    font-family: 'Work Sans';
+    justify-content: space-between;
+}
+.goodsDesc p{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.addGoodsBtn{
+    padding: 10px;
+    background: rgb(42, 245, 42);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.heder{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333;
+}
+.menu{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+.menu a{
+    text-decoration: none;
+    color: white;
+}
+.shop {
+    background: linear-gradient(90deg, #2AF598 0%, #009EFD 100%);
+    background-clip: text;
+    color: transparent;
+}
+.cartPopup{
+    width: 70%;
+    min-height: 70vh;
+    box-shadow: 0 0 10px #999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    z-index: 3;
+}
+.addForm{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.addUse{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.inpCart{
+    background-color: #95a5a6 ;
+    border: none;
+    margin: 5px;
+    height: 30px;
+    border-radius: 10px;
+}
+.inpCart::placeholder{
+    color: black;
+}
+.addGoods{
+    background-color: #3498db;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+.addU{
+    width: 100px;
+    height: 50px;
+    background-color: #3498db;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+.cartPopup input{
+    width: 50%;
+    height: 30px;
+    margin: 5px;
+}
+.textPopap{
+    margin: 15px;
+}
+#mark{
+    position: relative;
+    left: 65vh;
+    bottom: 10vh;
+    font-size: 30px;
+    color: red;
+}
+#mark7{
+    position: relative;
+    left: 65vh;
+    bottom: 10vh;
+    font-size: 30px;
+    color: red;
+}
+#mark3{
+    position: relative;
+    left: 65vh;
+    font-size: 30px;
+    color: red;
+}
+#mark5{
+    position: relative;
+    left: 65vh;
+    font-size: 30px;
+    color: red;
+}
+.logoOrder{
+    text-align: center;
+}
+.orderContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.orderItem {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    background-color: #333333d0;
+    color: #fff;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+}
+.delBut{
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: #2AF598;
+}
+.messageContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sendButMes{
+    width: 100px;
+    padding: 5px;
+    background-color: #2AF598;
+    border: none;
+    border-radius: 10px;
+}
+.mesPlace{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+    margin: 10vh 0 10px 0;
+}
+.deleteOrderBtn{
+    width: 100px;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f52a2a;
+    margin: 5px;
+}
+.doneOrderBtn{
+    width: 100px;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: #2AF598;
+    margin: 5px;
+}
+.orderButs{
+    display: flex;
+    flex-direction: column;
+}
+.adressContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sendButAdress{
+    width: 100px;
+    padding: 5px;
+    background-color: #2AF598;
+    border: none;
+    border-radius: 10px;
+}
+.adressPlace{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+    margin: 10vh 0 10px 0;
+}
+.goodsImg{
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    margin-bottom: 10px;
+}
+.changeAdressBtn{
+    padding: 10px;
+    background: rgb(42, 245, 42);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.sendMessageBtn{
+    padding: 10px;
+    background: rgb(42, 245, 42);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.addlogin{
+    padding: 10px;
+    background: rgb(42, 245, 42);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.adressContainerView{
+    width: 100%;
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.adressBox{
+    min-height: 150px;
+    background-color: #333;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.deleteAdressBtn{
+    width: 100px;
+    padding: 5px;
+    background-color: #2AF598;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.ourAdressAdmin{
+    text-align: center;
+}
+
+
+
+
+
+
+.AdminContainerView{
+    width: 100%;
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.adminBox{
+    min-height: 150px;
+    background-color: #333;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.deleteAdminBtn{
+    width: 100px;
+    padding: 5px;
+    background-color: #2AF598;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+    .searchplace{
+        position: relative;
+        justify-content: center;
+    }
+    .menu{
+        width: 50%;
+        font-size: 15px;
+    }
+    .heder{
+        height: 25vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

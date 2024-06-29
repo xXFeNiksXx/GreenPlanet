@@ -1,0 +1,201 @@
+$('.addGoods').click(()=>{
+    let data = {
+        title: $('#title').val(),
+        price: $('#price').val(),
+        file: $('#file').val()
+    }
+    const formData = new FormData();
+    formData.append('file', $('#file')[0].files[0]);
+    axios.post('http://localhost:3000/api/upload', formData)
+    axios.post('http://localhost:3000/add-goods', data)
+        .then(res=>{
+            console.log(res)
+        })
+        location.reload();
+})
+
+$('.sendButAdress').click(()=>{
+    let data = {
+        adress: $('#adress').val()
+    }
+
+    axios.post('http://localhost:3000/adress', data)
+            location.reload();
+})
+
+
+function viewProduct(){
+    axios.get('http://localhost:3000/goods')
+        .then(res=>{
+            for(let el of res.data){
+                let imeg = el.file;
+                let normImeg = imeg.substring(12);
+                console.log(normImeg);
+                $('.goodsContainer').append(`<div class='cardgoods'><img class="goodsImg" src="/uploads/${normImeg}" alt=""> <div class='goodsDesc'><h3 class="nameGoods">${el.title}</h3><p class="priceGoods">${el.price}$</p><button class="delBut" id="${el._id}">delete</button></div></div>`)
+            }
+            $('.cardgoods').click(function (e) {
+
+                axios.delete(`http://localhost:3000/goods/${e.target.id}`)
+                    .then(res => {
+                        location.reload();
+                    })
+            })
+        })
+}
+viewProduct()
+
+axios.get('http://localhost:3000/getorders')
+    .then(res => {
+        console.log(res.data);
+        let doneid;
+        let dataOrder;
+
+        for (let el of res.data) {
+            let goods = '';
+            let cardId = el._id;
+            console.log(cardId);
+            for (let item of el.list) {
+                goods += item.title + ' ';
+            }
+            console.log(el);
+            let date = new Date(el.time);
+            $('.orderContainer').append(`<div class='orderItem'>
+            <h3>${el.name}</h3>
+            <div>${el.phone}</div>
+            <div class="productContainer">${goods}</div>
+            <div class="orderButs">
+            <button class="deleteOrderBtn" id="${el._id}">delete</button>
+            </div>
+            <div>
+                 <div>${date.getDate()}/${date.getMonth()}/${date.getFullYear()}</div>
+                  <div>${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}</div>
+            </div>
+            
+        </div>`)
+        doneid = el._id + 'donebtn';
+        console.log(doneid);
+        }
+        $(`.deleteOrderBtn`).click(function (e) { 
+            axios.delete(`http://localhost:3000/orders/${e.target.id}`)
+            .then(res => {
+                location.reload();
+            })
+        });
+        // $(`.doneOrderBtn`).click(function (e) { 
+        //     let idlong = e.target.id;
+        //     let idlongindtring = JSON.stringify(idlong);
+        //     if (idlongindtring.substring(25, 32) == 'donebtn') {
+        //         axios.post(`http://localhost:3000/doneorders`)
+        //     }
+        // });
+    })
+
+
+
+
+
+
+
+let cheker = true;
+let pop = document.getElementById('pop');
+let wrbox = document.getElementById('wrap');
+$(`.addGoodsBtn`).click(function () { 
+    if (cheker == true) {
+        pop.style.display = 'flex';
+        cheker = false;
+        wrbox.style.filter = 'blur(1px)';
+    }else{
+        pop.style.display = 'none';
+        cheker = true;
+        wrbox.style.filter = 'blur(0px)';
+    }
+});
+
+
+
+
+
+
+
+let cheker3 = true;
+let pop3 = document.getElementById('pop3');
+$(`.changeAdressBtn`).click(function () { 
+    if (cheker3 == true) {
+        pop3.style.display = 'flex';
+        cheker3 = false;
+        wrbox.style.filter = 'blur(1px)';
+    }else{
+        pop3.style.display = 'none';
+        cheker3 = true;
+        wrbox.style.filter = 'blur(0px)';
+    }
+});
+
+
+
+
+
+
+
+let cheker5 = true;
+let pop5 = document.getElementById('pop5');
+$(`.sendMessageBtn`).click(function () { 
+    if (cheker5 == true) {
+        pop5.style.display = 'flex';
+        cheker5 = false;
+        wrbox.style.filter = 'blur(1px)';
+    }else{
+        pop5.style.display = 'none';
+        cheker5 = true;
+        wrbox.style.filter = 'blur(0px)';
+    }
+});
+$('#mark').click(function () { 
+    pop.style.display = 'none';
+    cheker = true;
+    wrbox.style.filter = 'blur(0px)';
+});
+
+
+
+
+$('#mark3').click(function () { 
+    pop3.style.display = 'none';
+    cheker3 = true;
+    wrbox.style.filter = 'blur(0px)';
+});
+
+
+
+$('#mark5').click(function () { 
+    pop5.style.display = 'none';
+    cheker5 = true;
+    wrbox.style.filter = 'blur(0px)';
+});
+$('#sendMessage').click(function () { 
+    let data = {
+        message: $('#message').val()
+    }
+    axios.post(`http://localhost:3000/send-message`, data)
+        location.reload();
+});
+
+
+
+
+
+
+axios.get(`http://localhost:3000/ouradress`)
+.then(res=>{
+    for(let el of res.data){
+        console.log(el);
+        $('.adressContainerView').append(`<div class="adressBox"><h3 class='adressText'>${el.adress}</h3><button class="deleteAdressBtn" id="${el._id}">delete</button></div>`)
+
+    }
+    $(`.deleteAdressBtn`).click(function (e) { 
+        axios.delete(`http://localhost:3000/adress/${e.target.id}`)
+        .then(res => {
+            location.reload();
+        })
+    });
+})

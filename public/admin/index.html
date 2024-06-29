@@ -1,11 +1,70 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>admin</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js' integrity='sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.js' integrity='sha512-pmaEGtUAy7E5gRmwjLqQAD/QWw0dL4Z59b6b+2HQkqQwQ+HcPLLb9/KbUNo5zr10WuXmbivK9nYVZOyDkMgZMg==' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    
+    <div class="cartPopup" id="pop">
+        <i class="fa-solid fa-xmark" id="mark"></i>
+        <h1 class="textPopap">Create new product</h1>
+        <form class="addForm" enctype="multipart/form-data">
+        <input type="text" id="title" placeholder="назва товару">
+        <input type="number" id="price" placeholder="ціна товару">
+        <input type="file" id="file" name="file" placeholder="Зображення">
+        <button class="addGoods" id="confirmBtn">Confirm</button>
+        </form>
+    </div>
+
+
+
+    <div class="cartPopup" id="pop3">
+        <i class="fa-solid fa-xmark" id="mark3"></i>
+        <div class="adressContainer">
+            <h1 class="logoOrder">Change adress</h1>
+            <textarea class="adressPlace" id="adress" placeholder="Ваше повідомлення"></textarea>
+            <button class="sendButAdress" id="sendAdress">Відправити</button>
+        </div>
+    </div>
+
+
+
+
+    <div class="cartPopup" id="pop5">
+        <i class="fa-solid fa-xmark" id="mark5"></i>
+        <div class="messageContainer">
+            <h1 class="logoOrder">Відправити повідомлення</h1>
+            <textarea class="mesPlace" id="message" placeholder="Ваше повідомлення"></textarea>
+            <button class="sendButMes" id="sendMessage">Відправити</button>
+        </div>
+    </div>
+    <div class="wrap" id="wrap">
+        <header class="heder">
+            <div class="butns">
+            <button class="addGoodsBtn">add new goods</button>
+            <button class="changeAdressBtn">Change adress</button>
+            <button class="sendMessageBtn">Send message</button>
+        </div>
+            <div class="menu">
+                <a href="/"><h4 class="home">Home</h4></a>
+                <h4 class="shop">Admin</h4>
+                <a href="/allgoods"><h4 class="about">All goods</h4></a>
+                <a href="/#basementAdress" id="contactlink"><h4 class="contact">Contact</h4></a>
+            </div>
+        </header>
+        <div class="goodsContainer"></div>
+        <h1 class="logoOrder">Замовлення</h1>
+        <div class="orderContainer"></div>
+        <h1 class="ourAdressAdmin">Адреси</h1>
+        <div class="adressContainerView"></div>
+    </div>
+    <script src="./main.js"></script>
 </body>
 </html>
