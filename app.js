@@ -14,35 +14,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-const TOKEN = '7189616163:AAErM6ZRzHy3tNlOeoL9knSsD7D4yp9fNSM';
+const TOKEN1 = '7189616163:AAErM6ZRzHy3tNlOeoL9knSsD7D4yp9fNSM';
+const TOKEN2 = '7319494521:AAEUUm5mrK4J03l0tG-0ALM2qvb8pH-0Mo0';
 const chatid = '5365010134';
-const bot = new TelegramBot(TOKEN, { polling: false });
+const bot1 = new TelegramBot(TOKEN1, { polling: false });
+const bot2 = new TelegramBot(TOKEN2, { polling: false });
 
-const commands = [
-
-    {
-
-        command: "start",
-        description: "Запуск бота"
-
-    },
-    {
-
-        command: "addgoods",
-        description: "додати товар"
-
-    }
-
-]
-
-bot.setMyCommands(commands);
-
-
-bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-    console.log('Message received: ', msg);
-    bot.sendMessage(chatId, 'Received your message');
-});
 
 
 
@@ -129,7 +106,7 @@ app.post('/save-order', async (req, res) => {
 
         await order.save();
         const title = list[0].title;
-        bot.sendMessage(chatid, `new order!!!!! \n name: ${name} \n phone: ${phone} \n list: ${title}`);
+        bot2.sendMessage(chatid, `new order!!!!! \n name: ${name} \n phone: ${phone} \n list: ${title}`);
         console.log('Order saved successfully');
         res.status(201).json(order);
     } catch (err) {
