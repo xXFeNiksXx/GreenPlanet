@@ -96,21 +96,27 @@ $('#confirmBtn').click(function (e) {
 
 
 
-
-
-$('#subscribe').click(() => {
+function validateEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    return emailPattern.test(email);
+  }
+$('#subscribe').click(async function () {
     let data = {
         email: $('#email').val()
     };
-    axios.post('http://localhost:3000/send-mail', data)
+    if(validateEmail(data.email)){
+        axios.post('http://localhost:3000/send-mail', data)
         .then(res => {
-            alert('Користувача збережено');
-            $('#email').val('');
+            console.log(res);
         })
+    }
 });
-
-
-
+$('#pushMes').click(async function () { 
+    const perm = await Notification.requestPermission();
+    if (perm === 'granted') {
+        document.cookie = "pushmessage=true;";
+    }
+});
 
 
 
@@ -135,3 +141,12 @@ $(document).ready(function (){
         }, 2000);
     });
   });
+
+
+
+  
+let spinnerContainer = document.querySelector('.spinnerContainer');
+
+window.addEventListener('load', () => {
+    spinnerContainer.classList.add('hide');
+})

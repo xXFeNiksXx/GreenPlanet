@@ -127,3 +127,31 @@
     border-radius: 10px;
     color: white;
 }
+.spinnerContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1.5s;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+}
+.hide{
+    opacity: 0;
+    z-index: -100;
+}
+.spinnerLoad {
+    border: 1vh solid #71ff54;
+    border-top: 4px solid #1fa71a;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 5px;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

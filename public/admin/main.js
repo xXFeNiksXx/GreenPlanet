@@ -1,3 +1,11 @@
+function getUserIdFromUrl() {
+    const path = window.location.pathname;
+    let userId = path.substring(7);
+    return userId;
+}
+
+const userId = getUserIdFromUrl();
+    console.log('User ID:', userId);
 $('.addGoods').click(()=>{
     let data = {
         title: $('#title').val(),
@@ -13,7 +21,19 @@ $('.addGoods').click(()=>{
         })
         location.reload();
 })
-
+$('#confirmBtnnnn').click((e)=>{
+    let data = {
+        username: $('#usernameN').val(),
+        password: $('#passwordN').val(),
+        id: userId
+    }
+    axios.post('http://localhost:3000/updateuser', data)
+        .then(res=>{
+            console.log(res);
+        }).catch(err => {
+            console.error('Error updating user:', err);
+        });
+})
 $('.sendButAdress').click(()=>{
     let data = {
         adress: $('#adress').val()
@@ -133,6 +153,23 @@ $(`.changeAdressBtn`).click(function () {
 
 
 
+let cheker123 = true;
+let pop123 = document.getElementById('pop123');
+$(`.newPasswordBtn`).click(function () { 
+    if (cheker123 == true) {
+        pop123.style.display = 'flex';
+        cheker123 = false;
+        wrbox.style.filter = 'blur(1px)';
+    }else{
+        pop123.style.display = 'none';
+        cheker123 = true;
+        wrbox.style.filter = 'blur(0px)';
+    }
+});
+
+
+
+
 
 
 
@@ -155,7 +192,11 @@ $('#mark').click(function () {
     cheker = true;
     wrbox.style.filter = 'blur(0px)';
 });
-
+$('#mark123').click(function () { 
+    pop123.style.display = 'none';
+    cheker = true;
+    wrbox.style.filter = 'blur(0px)';
+});
 
 
 
@@ -172,12 +213,20 @@ $('#mark5').click(function () {
     cheker5 = true;
     wrbox.style.filter = 'blur(0px)';
 });
-$('#sendMessage').click(function () { 
+$('#sendMessage').click(async function () { 
     let data = {
         message: $('#message').val()
     }
-    axios.post(`http://localhost:3000/send-message`, data)
-        location.reload();
+    $('.messageLoad').empty();
+    $('.messageLoad').append(`<div class="spinner"></div><h1>wait</h1>`);
+  await axios.post(`http://localhost:3000/send-message`, data)
+    .then(res => {
+        console.log(res);
+        $('.messageLoad').empty();
+        new Notification('Daunku', {
+            body: $('#message').val()
+        });
+    })
 });
 
 
@@ -198,4 +247,11 @@ axios.get(`http://localhost:3000/ouradress`)
             location.reload();
         })
     });
+})
+
+
+let spinnerContainer = document.querySelector('.spinnerContainer');
+
+window.addEventListener('load', () => {
+    spinnerContainer.classList.add('hide');
 })

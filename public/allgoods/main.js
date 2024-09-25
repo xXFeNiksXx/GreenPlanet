@@ -68,3 +68,8 @@ $('#confirmBtn').click(function (e) {
     }
     console.log(data);
 });
+let spinnerContainer = document.querySelector('.spinnerContainer');
+
+window.addEventListener('load', () => {
+    spinnerContainer.classList.add('hide');
+})

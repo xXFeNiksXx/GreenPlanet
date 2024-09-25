@@ -123,6 +123,13 @@
     border-radius: 10px;
     color: white;
 }
+.newPasswordAdd{
+    background-color: #3498db;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
 .addU{
     width: 100px;
     height: 50px;
@@ -140,7 +147,28 @@
 .textPopap{
     margin: 15px;
 }
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 5px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 #mark{
+    position: relative;
+    left: 65vh;
+    bottom: 10vh;
+    font-size: 30px;
+    color: red;
+}
+#mark123{
     position: relative;
     left: 65vh;
     bottom: 10vh;
@@ -275,6 +303,13 @@
     border-radius: 10px;
     font-size: 15px;
 }
+.newPasswordBtn{
+    padding: 10px;
+    background: rgb(42, 245, 42);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
 .addlogin{
     padding: 10px;
     background: rgb(42, 245, 42);
@@ -349,7 +384,12 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
-
+.messageLoad{
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 5vh;
+}
 @media (max-width: 768px) {
     .searchplace{
         position: relative;
@@ -366,3 +406,27 @@
         align-items: center;
     }
 }
+.spinnerContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1.5s;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+}
+.hide{
+    opacity: 0;
+    z-index: -100;
+}
+.spinnerLoad {
+    border: 1vh solid #71ff54;
+    border-top: 4px solid #1fa71a;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 5px;
+  }

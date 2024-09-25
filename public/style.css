@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 html{
+    max-width: 100%;
     overflow-x: hidden;
 }
 .wrap{
@@ -14,6 +15,7 @@ html{
     background-position: bottom;
     background-repeat: no-repeat; 
 }
+
 .heder{
     width: 100%;
     height: 10vh;
@@ -319,6 +321,17 @@ html{
         top: 15vh;
         left: 10%;
     }
+    .pushMessage{
+        position: relative;
+        right: 30%;
+        top: 15vh;
+        text-align: center;
+        color: white;
+        padding: 1vh;
+        border: none;
+        border-radius: 30px;
+        background: linear-gradient(90deg, #2AF598 0%, #009EFD 100%);
+    }
     .subscribeBtn{
         text-align: center;
         color: white;
@@ -560,3 +573,31 @@ html{
         right: 25%;
     }
 }
+.spinnerContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1.5s;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+}
+.hide{
+    opacity: 0;
+    z-index: -100;
+}
+.spinnerLoad {
+    border: 1vh solid #71ff54;
+    border-top: 4px solid #1fa71a;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 5px;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

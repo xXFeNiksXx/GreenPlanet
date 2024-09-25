@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/admin/style.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js' integrity='sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.js' integrity='sha512-pmaEGtUAy7E5gRmwjLqQAD/QWw0dL4Z59b6b+2HQkqQwQ+HcPLLb9/KbUNo5zr10WuXmbivK9nYVZOyDkMgZMg==' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <div class="spinnerContainer">
+    <div class="spinnerLoad"></div>
+</div>
     <div class="cartPopup" id="pop">
         <i class="fa-solid fa-xmark" id="mark"></i>
         <h1 class="textPopap">Create new product</h1>
@@ -20,6 +23,15 @@
         <input type="number" id="price" placeholder="ціна товару">
         <input type="file" id="file" name="file" placeholder="Зображення">
         <button class="addGoods" id="confirmBtn">Confirm</button>
+        </form>
+    </div>
+    <div class="cartPopup" id="pop123">
+        <i class="fa-solid fa-xmark" id="mark123"></i>
+        <h1 class="textPopap">Password</h1>
+        <form class="addForm">
+        <input type="text" id="usernameN" placeholder="новий нікнейм">
+        <input type="number" id="passwordN" placeholder="новий пароль">
+        <button class="newPasswordAdd" id="confirmBtnnnn">Confirm</button>
         </form>
     </div>
 
@@ -41,6 +53,7 @@
         <i class="fa-solid fa-xmark" id="mark5"></i>
         <div class="messageContainer">
             <h1 class="logoOrder">Відправити повідомлення</h1>
+            <div class="messageLoad"></div>
             <textarea class="mesPlace" id="message" placeholder="Ваше повідомлення"></textarea>
             <button class="sendButMes" id="sendMessage">Відправити</button>
         </div>
@@ -51,6 +64,7 @@
             <button class="addGoodsBtn">add new goods</button>
             <button class="changeAdressBtn">Change adress</button>
             <button class="sendMessageBtn">Send message</button>
+            <button class="newPasswordBtn">new password</button>
         </div>
             <div class="menu">
                 <a href="/"><h4 class="home">Home</h4></a>
@@ -65,6 +79,6 @@
         <h1 class="ourAdressAdmin">Адреси</h1>
         <div class="adressContainerView"></div>
     </div>
-    <script src="./main.js"></script>
+    <script src="/admin/main.js"></script>
 </body>
 </html>
