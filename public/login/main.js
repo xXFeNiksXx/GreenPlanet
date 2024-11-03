@@ -1,5 +1,7 @@
 $('#loginBtn').click(function (event) { 
     event.preventDefault();
+    let password = $('#password').val();
+    if(password.length > 8){
     let data = {
         username: $('#username').val(),
         password: $('#password').val()
@@ -18,6 +20,14 @@ $('#loginBtn').click(function (event) {
 
         setTimeout(() => $('#message').hide(), 5000);
     });
+}else{
+    $('.message').html(`<h1 class="textMessage">пароль має бути не менше 8 символів</h1>`);
+    $('#message').show();
+
+    setTimeout(function() {
+        $('#message').hide();
+    }, 5000);
+}
 });
 const container = document.getElementById('container');
 const registerBtn = document.getElementById('register');
@@ -30,8 +40,11 @@ registerBtn.addEventListener('click', () => {
 loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
+  
 $('#signUpBtn').click(function (event) { 
     event.preventDefault();
+    let passwordSign = $('#passwordSign').val();
+    if(passwordSign.length > 8){
     let data = {
         username: $('#usernameSign').val(),
         password: $('#passwordSign').val()
@@ -52,4 +65,12 @@ $('#signUpBtn').click(function (event) {
             $('#message').hide();
         }, 5000);
     });
+}else{
+    $('.message').html(`<h1 class="textMessage">пароль має бути не менше 8 символів</h1>`);
+    $('#message').show();
+
+    setTimeout(function() {
+        $('#message').hide();
+    }, 5000);
+}
 });

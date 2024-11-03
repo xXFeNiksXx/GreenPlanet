@@ -130,7 +130,6 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-
 body{
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
@@ -331,4 +330,23 @@ body{
 
 .container.active .toggle-right{
     transform: translateX(200%);
+}
+.message{
+    width: 30%;
+    height: 17vh;
+    background-color: rgba(255, 0, 0, 0.822);
+    border-radius: 10px;
+    border: none;
+    position: fixed;
+    top: 73vh;
+    left: 3%;
+    display: none;
+    color: white;
+    text-align: center;
+    z-index: 3000;
+}
+.textMessage{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }

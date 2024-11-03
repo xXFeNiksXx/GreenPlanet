@@ -35,7 +35,11 @@ $(`#cart`).click(function () {
 function showCartInner(cartList) {
     $('.cartPopupContainer').empty();
     for (let el of cartList) {
-        $('.cartPopupContainer').append(`<div>${el.title}</div>`);
+        console.log(el);
+        $('.cartPopupContainer').append(`<div class='newOrder'><h5>${el.title}</h5> <h5>${el.price}</h5></div>`);
+    }
+    if (cartList.length == 0) {
+        $('.cartPopupContainer').append(`<h1 class='nonOrder'>cart is empty!</h1>`);
     }
 }
 let data;

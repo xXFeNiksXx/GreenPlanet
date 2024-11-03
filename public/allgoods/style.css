@@ -96,12 +96,13 @@
     margin: 15px 0px;
 }
 .cartPopup{
-    width: 300px;
-    min-height: 300px;
+    width: 70%;
+    height: 90vh;
     box-shadow: 0 0 10px #999;
     position: fixed;
-    top: 100px;
-    right: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -126,6 +127,33 @@
     padding: 10px;
     border-radius: 10px;
     color: white;
+}
+.cartPopupContainer{
+    width: 90%;
+    height: 70%;
+    background-color: #b6c9c773;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+.nonOrder{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+.newOrder{
+    width: 100%;
+    min-height: 100px;
+    background-color: #33333391;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    align-items: center;
+}
+#myForm{
+    display: flex;
+    flex-direction: column;
 }
 .spinnerContainer{
     width: 100%;
