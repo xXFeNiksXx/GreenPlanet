@@ -14,8 +14,8 @@ $('.addGoods').click(()=>{
     }
     const formData = new FormData();
     formData.append('file', $('#file')[0].files[0]);
-    axios.post('http://localhost:3000/api/upload', formData)
-    axios.post('http://localhost:3000/add-goods', data)
+    axios.post('/api/upload', formData)
+    axios.post('/add-goods', data)
         .then(res=>{
             console.log(res)
         })
@@ -27,7 +27,7 @@ $('#confirmBtnnnn').click((e)=>{
         password: $('#passwordN').val(),
         id: userId
     }
-    axios.post('http://localhost:3000/updateuser', data)
+    axios.post('/updateuser', data)
         .then(res=>{
             console.log(res);
         }).catch(err => {
@@ -39,13 +39,13 @@ $('.sendButAdress').click(()=>{
         adress: $('#adress').val()
     }
 
-    axios.post('http://localhost:3000/adress', data)
+    axios.post('/adress', data)
             location.reload();
 })
 
 
 function viewProduct(){
-    axios.get('http://localhost:3000/goods')
+    axios.get('/goods')
         .then(res=>{
             for(let el of res.data){
                 let imeg = el.file;
@@ -55,7 +55,7 @@ function viewProduct(){
             }
             $('.cardgoods').click(function (e) {
 
-                axios.delete(`http://localhost:3000/goods/${e.target.id}`)
+                axios.delete(`/goods/${e.target.id}`)
                     .then(res => {
                         location.reload();
                     })
@@ -64,7 +64,7 @@ function viewProduct(){
 }
 viewProduct()
 
-axios.get('http://localhost:3000/getorders')
+axios.get('/getorders')
     .then(res => {
         console.log(res.data);
         let doneid;
@@ -96,7 +96,7 @@ axios.get('http://localhost:3000/getorders')
         console.log(doneid);
         }
         $(`.deleteOrderBtn`).click(function (e) { 
-            axios.delete(`http://localhost:3000/orders/${e.target.id}`)
+            axios.delete(`/orders/${e.target.id}`)
             .then(res => {
                 location.reload();
             })
@@ -219,7 +219,7 @@ $('#sendMessage').click(async function () {
     }
     $('.messageLoad').empty();
     $('.messageLoad').append(`<div class="spinner"></div><h1>wait</h1>`);
-  await axios.post(`http://localhost:3000/send-message`, data)
+  await axios.post(`/send-message`, data)
     .then(res => {
         console.log(res);
         $('.messageLoad').empty();
@@ -234,7 +234,7 @@ $('#sendMessage').click(async function () {
 
 
 
-axios.get(`http://localhost:3000/ouradress`)
+axios.get(`/ouradress`)
 .then(res=>{
     for(let el of res.data){
         console.log(el);
@@ -242,7 +242,7 @@ axios.get(`http://localhost:3000/ouradress`)
 
     }
     $(`.deleteAdressBtn`).click(function (e) { 
-        axios.delete(`http://localhost:3000/adress/${e.target.id}`)
+        axios.delete(`/adress/${e.target.id}`)
         .then(res => {
             location.reload();
         })

@@ -138,61 +138,8 @@ app.post('/adress', async (req, res) => {
         res.status(500).json({ message: err });
     }
 });
-app.get('/auth/register', async (req, res) => {
-    try {
-        const userCount = await User.countDocuments();
 
-        if (userCount > 0) {
-            return res.status(403).json({ message: 'Registration is disabled because a user already exists.' });
-        }
-
-        // No users exist, create a default admin user
-        const username = 'admin';
-        const password = '111';
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const userDataDefault = {
-            username,
-            password: hashedPassword,
-        };
-
-        const user = new User(userDataDefault);
-        await user.save();
-
-        // Generate a token after saving the user
-        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
-        res.cookie('token', token, { httpOnly: true, secure: false });
-
-        res.status(201).json({ message: 'Default user created', userId: user._id });
-
-    } catch (err) {
-        res.status(500).json({ message: 'Error during registration', error: err.message });
-    }
-});
-
-
-
-app.post('/auth/login', async (req, res) => {
-    const { username, password } = req.body;
-
-    if (!username || !password) {
-        return res.status(400).json({ message: 'Username and Password are required' });
-    }
-
-    const user = await User.findOne({ username });
-    if (!user) {
-        return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-        return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
-    res.cookie('token', token, { httpOnly: true, secure: false });
-    res.status(200).json({ message: 'Logged in successfully', userId: user._id });
-});app.post('/updateuser', async (req, res) => {
+app.post('/updateuser', async (req, res) => {
     let { username, password, id } = req.body;
 
     console.log('Received data:', { username, password, id });
@@ -271,10 +218,70 @@ app.post('/doneorders', async (req, res) => {
         res.status(500).json({ message: err });
     }
 })
+app.post('/findorderbyname', async (req, res) => {
+    const { name } = req.body;
+    try {
+        const order = await Orders.findOne({ name });
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        res.json(order);
+    } catch (err) {
+        res.status(500).json({ message: err });
+    }
+});
 
 
+app.post('/auth/register', async (req, res) => {
+    const { username, password } = req.body;
+    if (!username || !password) { 
+        return res.status(400).json({ message: 'Username and password are required!' });
+    }
 
-// midlewhere
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+        return res.status(400).json({ message: 'User already exists' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ username, password: hashedPassword });
+
+    try {
+        await user.save();
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
+        res.cookie('token', token, { httpOnly: true, secure: false }); // отправляем куку
+        res.status(201).json({ message: "User created successfully", userId: user._id });
+    } catch (err) {
+        res.status(500).json({ message: 'Failed to create user' });
+    }
+});
+
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    if (!username || !password) { // Исправленная проверка
+        return res.status(400).json({ message: 'Username and password are required!' });
+    }
+
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
+
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
+        res.cookie('token', token, { httpOnly: true, secure: false }); // Установка куки с токеном
+        res.status(200).json({ message: 'Logged in successfully', userId: user._id });
+    } catch (err) {
+        res.status(500).json({ message: 'Login failed', error: err.message });
+    }
+});
+
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
 
@@ -290,6 +297,7 @@ const authMiddleware = (req, res, next) => {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 };
+
 
 // get
 app.get('/goods', async (req, res) => {
@@ -348,6 +356,9 @@ app.get('/allgoods', (req, res) => {
 })
 app.get('/auth', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login', 'index.html'));
+});
+app.get('/auth/sign', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'signup', 'index.html'));
 });
 
 // delete

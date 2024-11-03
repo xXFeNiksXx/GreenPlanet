@@ -14,7 +14,7 @@
 
 let cartList = [];
 function getProduct(){
-    axios.get('http://localhost:3000/goods')
+    axios.get('/goods')
         .then(res=>{
             let count = 0;
             for(let el of res.data){
@@ -64,10 +64,7 @@ function showCartInner(cartList) {
     }
 }
 
-
 // закінчення коду корзини та товарів
-
-
 
 
 // відправка данних
@@ -80,7 +77,7 @@ $('#confirmBtn').click(function (e) {
             phone: $('#phone').val(),
             time: Date.now()
         }
-        axios.post(`http://localhost:3000/save-order`, data)
+        axios.post(`/save-order`, data)
         .then( res => {
             console.log(res.status);
             if (res.status === 201) {
@@ -105,7 +102,7 @@ $('#subscribe').click(async function () {
         email: $('#email').val()
     };
     if(validateEmail(data.email)){
-        axios.post('http://localhost:3000/send-mail', data)
+        axios.post('/send-mail', data)
         .then(res => {
             console.log(res);
         })
@@ -120,7 +117,7 @@ $('#pushMes').click(async function () {
 
 
 
-axios.get(`http://localhost:3000/ouradress`)
+axios.get(`/ouradress`)
 .then(res=>{
     for(let el of res.data){
         console.log(el);

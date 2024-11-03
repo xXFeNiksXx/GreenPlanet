@@ -1,50 +1,55 @@
-   axios.get('http://localhost:3000/auth/register')
-    .then(res => {
-        console.log(res);
-    })
-    .catch(err => {
-        console.error(err.response.data.message);
-        $('.message').append(`<h1 class="textMessage">${err.response.data.message}</h1>`);
-    });
-
-$('#loginBtn').click(function () { 
+$('#loginBtn').click(function (event) { 
+    event.preventDefault();
     let data = {
         username: $('#username').val(),
         password: $('#password').val()
-    }
-    axios.post(`http://localhost:3000/auth/login`, data)
+    };
+    console.log("Sending data:", data);
+
+    axios.post(`/login`, data)
+    .then(res => {
+        console.log("відповідь сервера:", res.data);
+        window.location.href = `/admin/${res.data.userId}`;
+    })
+    .catch(err => {
+        console.error(err.response?.data?.message); 
+        $('.message').html(`<h1 class="textMessage">${err.response?.data?.message}</h1>`);
+        $('#message').show();
+
+        setTimeout(() => $('#message').hide(), 5000);
+    });
+});
+const container = document.getElementById('container');
+const registerBtn = document.getElementById('register');
+const loginBtn = document.getElementById('login');
+
+registerBtn.addEventListener('click', () => {
+    container.classList.add("active");
+});
+
+loginBtn.addEventListener('click', () => {
+    container.classList.remove("active");
+});
+$('#signUpBtn').click(function (event) { 
+    event.preventDefault();
+    let data = {
+        username: $('#usernameSign').val(),
+        password: $('#passwordSign').val()
+    };
+    console.log("Sending data:", data);
+
+    axios.post(`/auth/register`, data)
     .then(res => {
         console.log(res);
         window.location.href = `/admin/${res.data.userId}`;
     })
     .catch(err => {
         console.error(err.response.data.message);
-        $('.message').append(`<h1 class="textMessage">${err.response.data.message}</h1>`);
-        const messageElement = $('#message');
-        messageElement.show();
+        $('.message').html(`<h1 class="textMessage">${err.response.data.message}</h1>`);
+        $('#message').show();
 
-        // Скрываем сообщение через 5 секунд
         setTimeout(function() {
-            messageElement.hide();
+            $('#message').hide();
         }, 5000);
     });
-});
-
-const fileInput = document.getElementById('photo');
-const imgbut = document.querySelector('.img');
-
-
-imgbut.style.backgroundImage = `url(/img/userAccaunt.png)`;
-
-fileInput.addEventListener('change', () => {
-    const file = fileInput.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            imgbut.style.backgroundImage = `url(${e.target.result})`;
-        };
-        reader.readAsDataURL(file);
-    } else {
-        imgbut.style.backgroundImage = `url(/img/userAccaunt.png)`;
-    }
 });

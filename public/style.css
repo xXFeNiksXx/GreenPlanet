@@ -588,6 +588,10 @@ html{
     opacity: 0;
     z-index: -100;
 }
+input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
 .spinnerLoad {
     border: 1vh solid #71ff54;
     border-top: 4px solid #1fa71a;

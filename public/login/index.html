@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,9 +18,65 @@
         <input class="inp1" type="text" id="username">
         <input class="inp2" type="password" id="password">
         <button class="butlog" id="loginBtn">log in</button>
-        <!-- <button class="butsign" id="signUpBtn">sign up</button> -->
+        <h5 class="linkSign">Do not have accaunt? <a class="linkS" href="/auth/sign">Create a new accaunt</a></h5>
     </div>
     </div>
     <script src="/login/main.js"></script>
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js" integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="/login/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:regular,500,600,700,italic,500italic,600italic,700italic" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,regular,700" rel="stylesheet" />
+    <title>Logining</title>
+</head>
+
+<body>
+    <div class="wrap">
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>Create accaunt</h1>
+                <input type="text" placeholder="Name" id="usernameSign">
+                <input type="password" placeholder="Password" id="passwordSign">
+                <button class="butsign" id="signUpBtn">sign up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h1>Sign In</h1>
+                <input class="inp1" type="text" placeholder="Name" id="username">
+                <input class="inp2" type="password" placeholder="Password" id="password">
+                <button class="butlog" id="loginBtn">log in</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Log in or register with your personal data to use all the features</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Log in or register with your personal data to use all the features</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="/login/main.js"></script>
+</body>
+
 </html>

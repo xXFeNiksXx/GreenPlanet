@@ -1,5 +1,5 @@
 let cartList = [];
-    axios.get('http://localhost:3000/goods')
+    axios.get('/goods')
         .then(res=>{
             for(let el of res.data){
                 let imeg = el.file;
@@ -47,7 +47,7 @@ $('#confirmBtn').click(function (e) {
             phone: $('#phone').val(),
             time: Date.now()
         }
-        axios.post(`http://localhost:3000/save-order`, data)
+        axios.post(`/save-order`, data)
         .then( res => {
             console.log(res.status);
             if (res.status === 200) {
@@ -59,7 +59,7 @@ $('#confirmBtn').click(function (e) {
                 
                     let formData = data;
         
-                    axios.post('http://localhost:3000/sentname', formData)
+                    axios.post('/sentname', formData)
                     .then((res)=>{
                         console.log(res);
                     })
