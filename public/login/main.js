@@ -1,3 +1,13 @@
+$(document).ready(function () {
+    axios.get(`/auth/check-token`)
+    .then(res => {
+        console.log("Користувач авторизований:", res.data);
+        window.location.href = `/admin/${res.data.userId}`;
+    })
+    .catch(err => {
+        console.log("Користувач не авторизований або токен недійсний");
+    });
+});
 $('#loginBtn').click(function (event) { 
     event.preventDefault();
     let password = $('#password').val();

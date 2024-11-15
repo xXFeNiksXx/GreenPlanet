@@ -249,7 +249,7 @@ app.post('/auth/register', async (req, res) => {
     try {
         await user.save();
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
-        res.cookie('token', token, { httpOnly: true, secure: false }); // отправляем куку
+        res.cookie('token', token, { httpOnly: true, secure: false });
         res.status(201).json({ message: "User created successfully", userId: user._id });
     } catch (err) {
         res.status(500).json({ message: 'Failed to create user' });
@@ -259,7 +259,7 @@ app.post('/auth/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    if (!username || !password) { // Исправленная проверка
+    if (!username || !password) {
         return res.status(400).json({ message: 'Username and password are required!' });
     }
 
@@ -275,7 +275,7 @@ app.post('/login', async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
-        res.cookie('token', token, { httpOnly: true, secure: false }); // Установка куки с токеном
+        res.cookie('token', token, { httpOnly: true, secure: true });
         res.status(200).json({ message: 'Logged in successfully', userId: user._id });
     } catch (err) {
         res.status(500).json({ message: 'Login failed', error: err.message });
@@ -283,20 +283,24 @@ app.post('/login', async (req, res) => {
 });
 
 const authMiddleware = (req, res, next) => {
-    const token = req.cookies.token;
-
+    const token = req.cookies.token; // Changed from req.cookie.token to req.cookies.token
     if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
+      return res.status(401).json({ message: 'Unauthorized' });
     }
-
     try {
-        const decoded = jwt.verify(token, JWT_SECRET);
-        req.userId = decoded.userId;
-        next();
+      const decoded = jwt.verify(token, JWT_SECRET);
+      req.userId = decoded.userId;
+      next();
     } catch (err) {
-        return res.status(401).json({ message: 'Unauthorized' });
+      res.status(401).json({ message: 'Unauthorized' });
     }
-};
+  };
+  app.get('/admin', (req, res) => {
+    res.status(401).json({ message: 'Unauthorized' });
+  });
+  app.get('/auth/check-token', authMiddleware, (req, res) => {
+    res.status(200).json({ message: 'Authenticated', userId: req.userId });
+});
 
 
 // get
@@ -343,13 +347,12 @@ app.get('/getorders', async (req, res) => {
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
-
 
 app.get('/admin/:id', authMiddleware, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'))
-})
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'));
+});
 
 app.get('/allgoods', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'allgoods', 'index.html'))
