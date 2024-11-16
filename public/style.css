@@ -303,7 +303,7 @@ html{
         border-radius: 30px;
         background: #FFFFFF33;
         border: none;
-        width: 350px;
+        width: 25%;
         height: 50px;
         color: white;
         padding-left: 10px;
@@ -340,7 +340,7 @@ html{
         border: none;
         border-radius: 30px;
         position: relative;
-        right: 8.5%;
+        right: 9%;
         background: linear-gradient(90deg, #2AF598 0%, #009EFD 100%);
     }
     .types{
