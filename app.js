@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
 const mongoose = require('mongoose');
 const path = require('path');
 let nodemailer = require('nodemailer');
@@ -10,17 +9,26 @@ const TelegramBot = require('node-telegram-bot-api');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const axios = require("axios");
+require('dotenv').config();
 const JWT_SECRET = 'superWords';
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { type } = require('os');
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+const PORT = process.env.PORT;
+
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
-const TOKEN1 = '7189616163:AAErM6ZRzHy3tNlOeoL9knSsD7D4yp9fNSM';
-const TOKEN2 = '7319494521:AAEUUm5mrK4J03l0tG-0ALM2qvb8pH-0Mo0';
-const chatid = '5365010134';
+const TOKEN1 = process.env.TOKEN1;
+const TOKEN2 = process.env.TOKEN2;
+const chatid = process.env.chatid;
 const bot1 = new TelegramBot(TOKEN1, { polling: false });
 const bot2 = new TelegramBot(TOKEN2, { polling: false });
 
@@ -31,22 +39,13 @@ const bot2 = new TelegramBot(TOKEN2, { polling: false });
 
 
 
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './public/uploads');
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname);
-    }
-  })
+const storage = multer.memoryStorage();
   
   const upload = multer({ storage });
 
 
 app.use(express.json());
 app.use(express.static('public'));
-
 
 
 var transporter = nodemailer.createTransport({
@@ -56,40 +55,81 @@ var transporter = nodemailer.createTransport({
       pass: 'zczy ulbk tnra dylz'
     }
   });
-
-// mongoDB connect
 mongoose.connect(`mongodb+srv://nikitarich888:MX58nOgEJgUkmEKf@cluster0.56uudpl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
         console.log(`Connect to mongo DB`);
     })
-
-const Goods = mongoose.model('Goods', { title: String, price: Number, file: String });
+const Goods = mongoose.model('Goods', { title: String, price: Number, data: Buffer, contentType: String });
 const Mail = mongoose.model('Mail', { email: String });
 
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    data: Buffer,
+    contentType: String
 });
 
 const User = mongoose.model('User', userSchema);
+const feedbackSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    data: Buffer,
+    contentType: String,
+    message: {
+        type: String,
+        required: true
+    }
+});
+
+const Feedback = mongoose.model('Feedback', feedbackSchema);
+const articleSchema = new mongoose.Schema({
+    title: { type: String, required: true},
+    message: {
+        type: String,
+        required: true
+    },
+    goodinfo: { type: Boolean, default: false }
+});
+
+const Article = mongoose.model('Article', articleSchema);
 
 
-
-// post
-app.post('/api/upload', upload.single('file'), async (req, res) =>{
+app.post('/chatbotask', async (req, res) => {
     try {
-        const uploadedFile = req.file;
-        console.log('Saved successfuly!');
+        const { inpvalue } = req.body;
+        const result1 = await model.generateContent(inpvalue + ' перевірь чи цей текст має відношення до рослин. Не пиши нічого окрім так чи ні, тільки одне слово.');
+
+        const resultText = result1.response.text().trim();
+
+        if(resultText.toLowerCase() === 'так'){
+            const prompt = inpvalue;
+            const result = await model.generateContent(prompt);
+            console.log("Final generated result:", result.response.text());
+            res.json(result.response.text());
+        } else {
+            res.json("Вибачте, проте я можу допомогти вам тільки з питаннями, які пов'язані з ботанікою.");
+        }
     } catch (err) {
+        console.error('Помилка при генерації тексту:', err);
         res.status(500).json({ message: err });
     }
-})
-app.post('/add-goods', async (req, res) => {
+});
+
+
+app.post('/add-goods', upload.single('photo'), async (req, res) => {
     try {
         const { title } = req.body;
         const { price } = req.body;
-        const { file } = req.body;
-        const goods = new Goods({ title, price, file });
+        let newgoods = {
+            title,
+            price
+        };
+        if (req.file) {
+            newgoods.data = req.file.buffer,
+            newgoods.contentType = req.file.mimetype
+        }else{
+            return res.status(400).json({ message: 'Image is required' });
+        }
+        const goods = new Goods(newgoods);
         await goods.save();
         console.log('Add new goods');
         res.status(201).json(goods);
@@ -117,8 +157,8 @@ app.post('/save-order', async (req, res) => {
 
         await order.save();
         const title = list[0].title;
-        bot2.sendMessage(chatid, `new order!!!!! \n name: ${name} \n phone: ${phone} \n list: ${title}`);
-        console.log('Order saved successfully!!!!!!!!!!');
+        bot2.sendMessage(chatid, `new order! \n name: ${name} \n phone: ${phone} \n list: ${title}`);
+        console.log('Order saved successfully!');
         res.status(201).json(order);
     } catch (err) {
         res.status(500).json({ message: err });
@@ -201,6 +241,76 @@ app.post('/send-mail', async (req, res) => {
         res.status(500).json({ message: err });
     }
 })
+app.post('/article', async (req, res) => {
+    console.log(req.body);
+    try {
+        const { message, title } = req.body;
+
+        if (!message || !title) {
+            return res.status(400).json({ message: 'Message and title are required' });
+        }
+        const article = new Article({
+            title: title,
+            message: message
+        });
+
+        await article.save();
+        console.log('Article saved successfully');
+        res.status(201).json({ message: 'Article saved successfully', article });
+    } catch (err) {
+        console.error('Error saving feedback:', err.message);
+        res.status(500).json({ message: 'Failed to save feedback', error: err.message });
+    }
+});
+app.post('/goodinfo/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { goodinfo } = req.body;
+
+        const updatedArticle = await Article.findByIdAndUpdate(
+            id,
+            { goodinfo },
+            { new: true }
+        );
+
+        if (!updatedArticle) {
+            return res.status(404).json({ message: 'Article not found' });
+        }
+
+        res.json(updatedArticle);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+app.post('/feedback', async (req, res) => {
+    try {
+        const { message, ID } = req.body;
+
+        if (!message || !ID) {
+            return res.status(400).json({ message: 'Message and User ID are required' });
+        }
+
+        const user = await User.findById(ID);
+        console.log(user);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const feedback = new Feedback({
+            username: user.username,
+            data: user.data,
+            contentType: user.contentType,
+            message: message
+        });
+
+        await feedback.save();
+        console.log('Feedback saved successfully');
+        res.status(201).json({ message: 'Feedback saved successfully', feedback });
+    } catch (err) {
+        console.error('Error saving feedback:', err.message);
+        res.status(500).json({ message: 'Failed to save feedback', error: err.message });
+    }
+});
 
 
 app.post('/doneorders', async (req, res) => {
@@ -214,6 +324,15 @@ app.post('/doneorders', async (req, res) => {
         console.log('Order done');
         res.status(201).json(doneOrder);
         await doneOrder.save();
+    } catch (err) {
+        res.status(500).json({ message: err });
+    }
+})
+app.post('/adminchek', async (req, res) => {
+    try {
+        const { ID } = req.body;
+        const user = await User.findById(ID);
+        res.json(user);
     } catch (err) {
         res.status(500).json({ message: err });
     }
@@ -232,31 +351,36 @@ app.post('/findorderbyname', async (req, res) => {
 });
 
 
-app.post('/auth/register', async (req, res) => {
+app.post('/auth/register', upload.single('photo'), async (req, res) => {
     const { username, password } = req.body;
-    if (!username || !password) { 
-        return res.status(400).json({ message: 'Username and password are required!' });
-    }
-
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-        return res.status(400).json({ message: 'User already exists' });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword });
-
-    try {
-        await user.save();
-        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
-        res.cookie('token', token, { httpOnly: true, secure: false });
-        res.status(201).json({ message: "User created successfully", userId: user._id });
-    } catch (err) {
-        res.status(500).json({ message: 'Failed to create user' });
-    }
+        if (!username || !password) {
+            return res.status(400).json({ message: 'Username and Password are required' });
+        }
+        try{
+            const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Username already exists' });
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+        let userData = {
+            username,
+            password: hashedPassword,
+        };
+    
+        if (req.file) {
+            userData.data = req.file.buffer,
+            userData.contentType = req.file.mimetype
+        }
+    
+        const user = new User(userData);
+         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
+         res.cookie('token', token, { httpOnly: true, secure: false });
+            await user.save();
+            res.status(201).json({ message: 'User created successfully',  userId: user._id });
+        } catch (err) {
+            res.status(400).json({ message: 'User already exists' });
+        }
 });
-
-
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -275,15 +399,14 @@ app.post('/login', async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
-        res.cookie('token', token, { httpOnly: true, secure: true });
+        res.cookie('token', token, { httpOnly: true, secure: false });
         res.status(200).json({ message: 'Logged in successfully', userId: user._id });
     } catch (err) {
         res.status(500).json({ message: 'Login failed', error: err.message });
     }
 });
-
 const authMiddleware = (req, res, next) => {
-    const token = req.cookies.token; // Changed from req.cookie.token to req.cookies.token
+    const token = req.cookies.token;
     if (!token) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
@@ -295,15 +418,10 @@ const authMiddleware = (req, res, next) => {
       res.status(401).json({ message: 'Unauthorized' });
     }
   };
-  app.get('/admin', (req, res) => {
-    res.status(401).json({ message: 'Unauthorized' });
-  });
+
   app.get('/auth/check-token', authMiddleware, (req, res) => {
     res.status(200).json({ message: 'Authenticated', userId: req.userId });
 });
-
-
-// get
 app.get('/goods', async (req, res) => {
     try {
         const goods = await Goods.find();
@@ -312,8 +430,39 @@ app.get('/goods', async (req, res) => {
         res.status(500).json({ message: err });
     }
 })
+app.get('/createadmin', async (req, res) => {
+    try {
+        const userCount = await User.countDocuments();
+        if (userCount === 0) {
+            const adminUsername = 'admin';
+            const adminPassword = '123456789';
+            const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
+            const admin = new User({ username: adminUsername, password: hashedPassword });
+            await admin.save();
+            console.log('Admin user created with username: "admin" and password: "123456789"');
+        } else {
+            console.log('Admin user already exists or database contains other users.');
+        }
+    } catch (err) {
+        console.error('Error while creating admin user:', err.message);
+    }try {
+        const userCount = await User.countDocuments();
+        if (userCount === 0) {
+            const adminUsername = 'admin';
+            const adminPassword = '123456789';
+            const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
+            const admin = new User({ username: adminUsername, password: hashedPassword });
+            await admin.save();
+            console.log('Admin user created with username: "admin" and password: "123456789"');
+        } else {
+            console.log('Admin user already exists or database contains other users.');
+        }
+    } catch (err) {
+        console.error('Error while creating admin user:', err.message);
+    }
+});
 app.get('/ouradress', async (req, res) => {
     try {
         const adress = await Adress.find();
@@ -322,8 +471,14 @@ app.get('/ouradress', async (req, res) => {
         res.status(500).json({ message: err });
     }
 })
-
-
+app.get('/getfeedback', async (req, res) => {
+    try {
+        const feedback = await Feedback.find();
+        res.json(feedback);
+    } catch (err) {
+        res.status(500).json({ message: err });
+    }
+})
 app.get('/emails', async (req, res) => {
     try {
         const mail = await Mail.find();
@@ -333,9 +488,14 @@ app.get('/emails', async (req, res) => {
         res.status(500).json({ message: err });
     }
 })
-
-
-
+app.get('/getarticles', async (req, res) => {
+    try {
+        const articles = await Article.find();
+        res.json(articles);
+    } catch (err) {
+        res.status(500).json({ message: err });
+    }
+})
 app.get('/getorders', async (req, res) => {
     try {
         const order = await Orders.find();
@@ -344,27 +504,30 @@ app.get('/getorders', async (req, res) => {
         res.status(500).json({ message: err });
     }
 })
-
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-})
-
 app.get('/admin/:id', authMiddleware, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'));
 });
-
 app.get('/allgoods', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'allgoods', 'index.html'))
 })
+app.get('/chatbot', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'chatbot', 'index.html'))
+})
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'firstpage', 'index.html'))
+})
+app.get('/articles', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'articlepage', 'index.html'))
+})
+app.get('/logining', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'logining', 'index.html'))
+})
 app.get('/auth', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'authing', 'index.html'));
 });
 app.get('/auth/sign', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'signup', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'authing', 'sign.html'));
 });
-
-// delete
 app.delete('/goods/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -375,9 +538,6 @@ app.delete('/goods/:id', async (req, res) => {
     }
 
 })
-
-
-
 app.delete('/adress/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -388,18 +548,6 @@ app.delete('/adress/:id', async (req, res) => {
     }
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
 app.delete('/orders/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -410,9 +558,6 @@ app.delete('/orders/:id', async (req, res) => {
     }
 
 })
-
-
-// listen
 app.listen(PORT, () => {
     console.log(`Server work on port: ${PORT}`);
 })

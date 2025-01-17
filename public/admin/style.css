@@ -8,6 +8,10 @@
     width: 100%;
     min-height: 100vh;
 }
+.box{
+    width: 100%;
+    min-height: 100vh;
+}
 .goodsContainer{
     display: flex;
     width: 100%;
@@ -61,6 +65,7 @@
     justify-content: space-around;
     align-items: center;
     background-color: #333;
+    color: white;
 }
 .menu{
     width: 30%;
@@ -214,6 +219,7 @@
     border-radius: 10px;
     padding: 10px;
     align-items: center;
+    border: 1px solid #2fdb8e;
 }
 .delBut{
     padding: 5px;
@@ -429,4 +435,199 @@
     height: 50px;
     animation: spin 1s linear infinite;
     margin: 5px;
+  }
+  .fidback{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+    margin: 10vh 0 10px 0;
+}
+.fidBackContainer{
+    width: 100%;
+    height: 75vh;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.fidbackSubmit{
+    padding: 10px;
+    background: rgb(42, 245, 42);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.logout{
+    padding: 10px;
+    background: rgb(42, 245, 42);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.article{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+    margin: 10vh 0 10px 0;
+}
+.articleContainer{
+    width: 100%;
+    height: 75vh;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.articleSubmit{
+    padding: 10px;
+    background: rgb(42, 245, 42);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.titleArticle{
+    width: 300px;
+    height: 30px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.articleCont{
+    width: 90%;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #2fdb8e;
+    border-radius: 5px;
+}
+.buttons button{
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: rgb(6, 161, 14);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 1s;
+}
+.buttons button:hover{
+    background-color: #2AF598;
+}
+.showmorebtn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: rgb(6, 161, 14);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.showmorebtn:hover {
+    background-color: rgb(49, 226, 58);
+}
+.articledetails {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+.ArticleContainer{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.articlechekerContainerText{
+    text-align: center;
+    margin: 10px;
+}
+.orderTextInfo{
+    margin: 50px;
+    color: rgb(223, 53, 53);
+}
+.mesText{
+    width: 50%;
+    border: 1px solid #2fdb8e;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    max-width: 300px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.dropdown-content button {
+    margin: 5px 0;
+    cursor: pointer;
+    font-family: Oxygen, sans-serif;
+}
+.btn{
+    padding: 10px;
+    background-color: rgb(6, 161, 14);
+    color: white;
+    border-radius: 10px;
+    border: none;
+  }
+  .logout{
+    padding: 10px;
+    background-color: rgb(6, 161, 14);
+    color: white;
+    border-radius: 10px;
+    border: none;
+  }
+  .grayscale-mode {
+    filter: grayscale(100%);
+}
+.menublock{
+    width: 300px;
+    height: 100vh;
+    background-color: darkblue;
+    position: fixed;
+    left: -300px;
+    z-index: 100;
+    border-radius: 0 10px 10px 0;
+    transition: 1s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .menublock a{
+    text-decoration: none;
+    color: white;
+    transition: 1s;
+  }
+  .menublock a:hover{
+    color: #08ba1d;
+  }
+  .menusets{
+    display: flex;
+    align-items: center;
+    margin-right: 5%;
+  }
+  .wrapContainer{
+    width: 100%;
+    min-height: 100vh;
+    transition: 1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }

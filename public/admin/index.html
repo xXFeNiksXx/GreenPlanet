@@ -21,7 +21,7 @@
         <form class="addForm" enctype="multipart/form-data">
         <input type="text" id="title" placeholder="Product name">
         <input type="number" id="price" placeholder="Price">
-        <input type="file" id="file" name="file" placeholder="Image">
+        <input type="file" id="photo" name="photo" placeholder="Image">
         <button class="addGoods" id="confirmBtn">Confirm</button>
         </form>
     </div>
@@ -49,26 +49,58 @@
             <button class="sendButMes" id="sendMessage">Send</button>
         </div>
     </div>
+    <div class="menublock">
+        <a href="/auth"><h4 style="margin: 5px;">Admin</h4></a>
+                    <a href="/allgoods"><h4 style="margin: 5px;">Goods</h4></a>
+                    <a href="/"><h4>Main</h4></a>
+                    <a href="/articles"><h4>Articles</h4></a>
+                    <a href="/chatbot"><h4 class="chatbot">PlantBot</h4></a>
+    </div>
     <div class="wrap" id="wrap">
+        <div class="wrapContainer">
+        <div class="box" id="box">
         <header class="heder">
+            <h2 class="logo"><i class="fa-solid fa-earth-americas" style="color: #08ba1d;"></i> GreenPlanet</h3>
             <div class="butns">
             <button class="addGoodsBtn">add new goods</button>
             <button class="changeAdressBtn">Change adress</button>
             <button class="sendMessageBtn">Send message</button>
+            <button class="logout">log out</button>
         </div>
-            <div class="menu">
-                <a href="/"><h4 class="home">Home</h4></a>
-                <h4 class="shop">Admin</h4>
-                <a href="/allgoods"><h4 class="about">All goods</h4></a>
-                <a href="/#basementAdress" id="contactlink"><h4 class="contact">Contact</h4></a>
+            <div class="menusets">
+                <i class="fa-solid fa-bars" id="burger" style="color: white; font-size: 25px; cursor: pointer; margin: 30px;"></i>
+            <div class="menusettings">
+                <div class="dropdown">
+                    <i class="fa-solid fa-gear" style="color: white; font-size: 25px; cursor: pointer;" id="dropdownButton"></i>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <button id="bgColor" class="btn">theme color</button>
+                        <button id="bgColor1" class="btn">B&W mode</button>
+                    </div>
+                </div>
+                </div>
             </div>
         </header>
+        <div class="fidBackContainer">
+            <h1>Add comments</h1>
+            <textarea maxlength="300" class="fidback" id="fidbackContent"></textarea>
+            <button class="fidbackSubmit" id="sendfidback">Send comment</button>
+        </div>
+        <div class="articleContainer">
+            <h1>Add article</h1>
+            <input type="text" placeholder="title" class="titleArticle">
+            <textarea class="article" id="articleContent"></textarea>
+            <button class="articleSubmit" id="sendarticle">Send article</button>
+        </div>
         <div class="goodsContainer"></div>
         <h1 class="logoOrder">Orders</h1>
         <div class="orderContainer"></div>
         <h1 class="ourAdressAdmin">Adress</h1>
         <div class="adressContainerView"></div>
+        <h1 class="articlechekerContainerText">Articles</h1>
+        <div class="ArticleContainer"></div>
     </div>
+</div>
+</div>
     <script src="/admin/main.js"></script>
 </body>
 </html>

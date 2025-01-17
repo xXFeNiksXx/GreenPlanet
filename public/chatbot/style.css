@@ -1,0 +1,216 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+  overflow: hidden;
+}
+.wrap{
+  width: 100%;
+  height: 100vh;
+}
+  .inputText{
+    width: 70%;
+    height: 50px;
+    padding: 5px;
+    background: transparent;
+    border: 1px solid #2fdb8e;
+  }
+  .clickBut{
+    background: none;
+    border: none;
+  }
+  .inpForm{
+    width: 70%;
+    height: 50px;
+    position: fixed;
+    top: 80%;
+    left: 60%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+  }
+  .clickBut{
+    position: relative;
+    right: 4%;
+  }
+  .logo{
+    margin: 10px;
+  }
+
+.heder{
+  width: 100%;
+  height: 10vh;
+  position: relative;
+  top: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.menu{
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+}
+.menu a{
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+.btn{
+  padding: 10px;
+  background-color: rgb(6, 161, 14);
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+.rescontent{
+  width: 60%;
+  height: 50vh;
+  position: relative;
+  left: 50%;
+  top: 10vh;
+  transform: translateX(-50%);
+  overflow-y: auto;
+  background-color: rgba(0, 128, 0, 0.295);
+  border-radius: 10px;
+  padding: 10px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #2fdb8e;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #333;
+  border-radius: 10px;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  max-width: 300px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.dropdown-content button {
+  margin: 5px 0;
+  cursor: pointer;
+  font-family: Oxygen, sans-serif;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content button {
+  margin: 5px 0;
+  cursor: pointer;
+  font-family: Oxygen, sans-serif;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Oxygen', sans-serif;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+th {
+  background-color: #08ba1d;
+  color: white;
+  text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+td {
+  color: #333;
+}
+
+td, th {
+  border-bottom: 1px solid #ddd;
+}
+
+caption {
+  font-size: 24px;
+  font-weight: bold;
+  color: #08ba1d;
+  margin-bottom: 10px;
+}
+
+table thead {
+  position: sticky;
+  top: 0;
+  background-color: #08ba1d;
+  z-index: 1;
+}
+
+table td, table th {
+  word-wrap: break-word;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.grayscale-mode {
+  filter: grayscale(100%);
+}
+.menublock{
+  width: 300px;
+  height: 100vh;
+  background-color: darkblue;
+  position: fixed;
+  left: -300px;
+  z-index: 100;
+  border-radius: 0 10px 10px 0;
+  transition: 1s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.menublock a{
+  text-decoration: none;
+  color: white;
+  transition: 1s;
+}
+.menublock a:hover{
+  color: #08ba1d;
+}
+.menusets{
+  display: flex;
+  align-items: center;
+  margin-right: 5%;
+}
+.wrapContainer{
+  width: 100%;
+  height: 100vh;
+  transition: 1s;
+}

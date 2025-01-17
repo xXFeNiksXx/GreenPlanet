@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/chatbot/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js" integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js" integrity="sha512-+2pW8xXU/rNr7VS+H62aqapfRpqFwnSQh9ap6THjsm41AxgA0MhFRtfrABS+Lx2KHJn82UOrnBKhjZOXpom2LQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="menublock">
+        <a href="/auth"><h4 class="shop" style="margin: 5px;">Admin</h4></a>
+                    <a href="/allgoods"><h4 class="about" style="margin: 5px;">Goods</h4></a>
+                    <a href="/"><h4>Main</h4></a>
+                    <a href="/articles"><h4>Articles</h4></a>
+                    <a href="/chatbot"><h4 class="chatbot">PlantBot</h4></a>
+    </div>
+    <div class="wrap">
+        <div class="wrapContainer">
+<header class="heder">
+    <h1 class="logo"><i class="fa-solid fa-earth-americas" style="color: #08ba1d;"></i> GreenPlanet</h1>
+    <div class="menusets">
+        <i class="fa-solid fa-bars" id="burger" style="font-size: 25px; cursor: pointer; margin: 30px;"></i>
+    <div class="menusettings">
+        <div class="dropdown">
+            <i class="fa-solid fa-gear" style=" font-size: 25px; cursor: pointer;" id="dropdownButton"></i>
+            <div class="dropdown-content" id="dropdownContent">
+                <button id="bgColor" class="btn">theme color</button>
+                <button id="bgColor1" class="btn">B&W mode</button>
+            </div>
+        </div>
+    </div>
+</div>
+</header>
+    <div class="inpForm">
+    <input class="inputText" type="text" placeholder="ask PlantBot" id="inp">
+    <button class="clickBut"><i class="fa-solid fa-paper-plane" style="font-size: 20px; color: #08ba1d;"></i></button>
+</div>
+    <div id="generated-content" class="rescontent"></div>
+</div>
+</div>
+    <script src="/chatbot/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/articlepage/style.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js' integrity='sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==' crossorigin='anonymous'></script>
+    <link href="https://fonts.googleapis.com/css?family=Lora:regular,500,600,700,italic,500italic,600italic,700italic" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,regular,700" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css' integrity='sha512-8BU3emz11z9iF75b10oPjjpamM4Mz23yQFQymbtwyPN3mNWHxpgeqyrYnkIUP6A8KyAj5k2p3MiYLtYqew7gIw==' crossorigin='anonymous'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.js' integrity='sha512-vHNHepeQWwAggJlhEk932jRS5sNdn/Nn4F+w4TpXW5dA+04qnd3e7YpfXo6auWhFG6z3FVhmScG4ovtF+qYeZw==' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+</head>
+<body>
+    <div class="menublock">
+        <a href="/auth"><h4 class="shop" style="margin: 5px;">Admin</h4></a>
+                    <a href="/allgoods"><h4 class="about" style="margin: 5px;">Goods</h4></a>
+                    <a href="/"><h4>Main</h4></a>
+                    <a href="/articles"><h4>Articles</h4></a>
+                    <a href="/chatbot"><h4 class="chatbot">PlantBot</h4></a>
+    </div>
+    <div class="wrap">
+        <div class="wrapContainer">
+        <header class="heder">
+            <h1 class="logo"><i class="fa-solid fa-earth-americas" style="color: #08ba1d;"></i> GreenPlanet</h1>
+            <div class="menusets">
+                <i class="fa-solid fa-bars" id="burger" style="font-size: 25px; cursor: pointer; margin: 30px;"></i>
+            <div class="menusettings">
+                <div class="dropdown">
+                    <i class="fa-solid fa-gear" style="font-size: 25px; cursor: pointer;" id="dropdownButton"></i>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <button id="bgColor" class="btn">theme color</button>
+                        <button id="bgColor1" class="btn">B&W mode</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </header>
+        <h1>Articles</h1>
+        <input type="text" class="filterArticles" id="filterInput" placeholder="filter">
+        <div class="articlesContainer"></div>
+    </div>
+</div>
+    <script src="/articlepage/main.js"></script>
+</body>
+</html>
