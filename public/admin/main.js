@@ -1,3 +1,18 @@
+(function () {
+    const path = window.location.pathname;
+    const adminPrefix = '/admin/';
+    let index = path.indexOf(adminPrefix);
+
+    if (index !== -1) {
+        const id = path.substring(index + adminPrefix.length);
+        if (!id) {
+            window.location.href = '/auth';
+        }
+    } else {
+        window.location.href = '/auth';
+    }
+})();
+
 function getUserIdFromUrl() {
     const path = window.location.pathname;
     let index = path.indexOf('/admin/');
@@ -451,4 +466,12 @@ $(document).click(function () {
 });
 $('.menublock').click(function (e) {
     e.stopPropagation();
+});
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    axios.post('/logout')
+        .then(response => {
+            console.log(response.data.message);
+            window.location.href = '/auth';
+        })
+        .catch(error => console.error('Ошибка:', error));
 });

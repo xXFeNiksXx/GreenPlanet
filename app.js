@@ -97,8 +97,11 @@ app.post('/chatbotask', async (req, res) => {
     try {
         const { inpvalue } = req.body;
         const result1 = await model.generateContent(inpvalue + ' перевірь чи цей текст має відношення до рослин. Не пиши нічого окрім так чи ні, тільки одне слово.');
+        
+        console.log("Response from model1:", result1.response);
 
         const resultText = result1.response.text().trim();
+        console.log("Result text after trimming:", resultText);
 
         if(resultText.toLowerCase() === 'так'){
             const prompt = inpvalue;
@@ -405,6 +408,11 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Login failed', error: err.message });
     }
 });
+app.post('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.json({ message: 'Logged out successfully' });
+});
+
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
