@@ -96,7 +96,7 @@ const Article = mongoose.model('Article', articleSchema);
 app.post('/chatbotask', async (req, res) => {
     try {
         const { inpvalue } = req.body;
-        const result1 = await model.generateContent(inpvalue + ' перевірь чи цей текст має відношення до рослин. Не пиши нічого окрім так чи ні, тільки одне слово.');
+        const result1 = await model.generateContent( 'Перевірь чи цей текст має відношення до рослин, рослинництва чи ботаніки.Не пиши нічого окрім так чи ні, тільки одне слово:' + inpvalue);
         
         console.log("Response from model1:", result1.response);
 

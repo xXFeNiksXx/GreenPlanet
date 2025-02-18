@@ -343,7 +343,7 @@ $('#sendarticle').click(function () {
     let title = $('.titleArticle').val();
     let message = $('#articleContent').val();
     console.log(message, title);
-    axios.post('http://localhost:3000/article', { message: message, title: title })
+    axios.post('/article', { message: message, title: title })
     .then(res => {
         console.log(res);
     })

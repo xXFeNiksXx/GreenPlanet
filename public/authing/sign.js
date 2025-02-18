@@ -28,7 +28,7 @@ $('#signUpBtn').click(function () {
     formData.append('username', username);
     formData.append('password', password);
     formData.append('photo', photo);
-    axios.post('http://localhost:3000/auth/register', formData, {
+    axios.post('/auth/register', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

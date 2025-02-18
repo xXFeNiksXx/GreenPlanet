@@ -25,7 +25,7 @@ $('#loginBtn').click(function () {
         username: $('#username').val(),
         password: $('#password').val()
     }
-    axios.post(`http://localhost:3000/login`, data)
+    axios.post(`/login`, data)
     .then(res => {
         console.log(res);
         window.location.href = `/admin/${res.data.userId}`;
