@@ -12,11 +12,12 @@ axios.get('/getarticles')
                     <h3 class="articletitle">${el.title}</h3>
                     <button class="showmorebtn">Show More</button>
                     <div class="articledetails" style="display: none;">
-                        <h3>${el.message}</h3>
+                        <h3 class="TextArtic">${el.message}</h3>
                     </div>
                 </div>
             `);
             }
+            updateTheme();
         }
         
         $('.showmorebtn').click(function() {
@@ -53,9 +54,11 @@ function updateTheme() {
     if (isDarkTheme) {
         $('.wrap').css('background', '#333');
         $('html').css('color', '#fff');
+        $('.TextArtic').css('color', '#fff');
     } else {
         $('.wrap').css('background', '#fff');
         $('html').css('color', '#333');
+        $('.TextArtic').css('color', '#333');
     }
 }
 updateTheme();

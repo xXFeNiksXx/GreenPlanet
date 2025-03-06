@@ -39,9 +39,11 @@ function updateTheme() {
     if (isDarkTheme) {
         $('.wrap').css('background', '#333');
         $('html').css('color', '#fff');
+        $('.inputText').css('color', '#fff');
     } else {
         $('.wrap').css('background', '#fff');
         $('html').css('color', '#333');
+        $('.inputText').css('color', '#333');
     }
 }
 updateTheme();
